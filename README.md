@@ -4,7 +4,7 @@ Laboratório de Projetos 3 - Class Assignment
 ---
 Root project
 ---
-
+<pre>
 Root project 'Tetris'
 \--- Project ':modules'
      +--- Project ':modules:AppBridge'
@@ -16,3 +16,4 @@ Root project 'Tetris'
           |    +--- Project ':modules:EngineBridge:CommandReceiver:Commander'
           |    \--- Project ':modules:EngineBridge:CommandReceiver:OpenCVConnector'
           \--- Project ':modules:EngineBridge:NotificationChannel'
+</pre>
