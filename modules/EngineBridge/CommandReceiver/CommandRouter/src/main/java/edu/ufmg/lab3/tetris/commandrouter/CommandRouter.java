@@ -10,14 +10,18 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 @Component
-public class CommandRouterapi implements Runnable{
+public class CommandRouter implements Runnable{
 	
+	private static Log log = LogFactoryUtil.getLog(CommandRouter.class);
 	private Executor pool;
 	private int PORT_NUMBER = 5648;
 	private Thread serverListener;
 	
-	public CommandRouterapi(){
+	public CommandRouter(){
 		pool = Executors.newFixedThreadPool(5);
 	}
 	
