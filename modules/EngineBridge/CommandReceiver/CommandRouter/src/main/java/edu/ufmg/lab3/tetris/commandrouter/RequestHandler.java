@@ -31,10 +31,10 @@ public class RequestHandler implements Runnable {
 			msg.setMove(in.readByte());
 			msg.setUnits(in.readByte());
 
-			log.debug("msg: " + msg);
+			log.debug("msg from " + client.getRemoteSocketAddress() + ":" + msg);
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 
 	}

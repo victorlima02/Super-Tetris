@@ -42,12 +42,13 @@ public class CommandRouter implements Runnable{
 			
 			while(true){
 				Socket client = server.accept();
+				log.debug("client connected: "+client.getRemoteSocketAddress());
 				RequestHandler worker = new RequestHandler(client);
 				pool.execute(worker);
 			}
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 	}
 
