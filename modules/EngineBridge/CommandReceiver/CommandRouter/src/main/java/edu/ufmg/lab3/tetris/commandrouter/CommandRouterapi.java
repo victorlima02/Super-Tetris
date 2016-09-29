@@ -8,21 +8,28 @@ import java.util.concurrent.Executors;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 
 @Component
 public class CommandRouterapi implements Runnable{
 	
 	private Executor pool;
 	private int PORT_NUMBER = 5648;
+	private Thread serverListener;
 	
 	public CommandRouterapi(){
-		pool = Executors.newFixedThreadPool(2);
+		pool = Executors.newFixedThreadPool(5);
 	}
 	
 	@Activate
 	public void activate(){
-		Thread thread = new Thread(this);
-		thread.run();
+		serverListener = new Thread(this);
+		serverListener.run();
+	}
+	
+	@Deactivate
+	public void deactive(){
+		serverListener.interrupt();
 	}
 	
 	public void run(){
