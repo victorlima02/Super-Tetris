@@ -1,4 +1,4 @@
-package edu.ufmg.lab3.tetris.commandrouter;
+package edu.ufmg.lab3.tetris.enginebridge.commandReceiver.commandrouter;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -9,6 +9,8 @@ import java.net.Socket;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import edu.ufmg.lab3.tetris.enginebridge.commandReceiver.Message;
 
 public class RequestHandler implements Runnable {
 

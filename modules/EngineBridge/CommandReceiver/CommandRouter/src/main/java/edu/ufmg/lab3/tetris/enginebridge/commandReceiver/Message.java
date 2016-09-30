@@ -1,4 +1,4 @@
-package edu.ufmg.lab3.tetris.commandrouter;
+package edu.ufmg.lab3.tetris.enginebridge.commandReceiver;
 
 public class Message {
 	private byte app;

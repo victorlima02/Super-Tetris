@@ -1,4 +1,4 @@
-package edu.ufmg.lab3.tetris.commandrouter;
+package edu.ufmg.lab3.tetris.enginebridge.commandReceiver.commandrouter;
 
 import java.io.IOException;
 import java.net.ServerSocket;
