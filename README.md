@@ -14,7 +14,7 @@ Root project 'Tetris'
           +--- Project ':modules:EngineBridge:CommandReceiver'
           |    +--- Project ':modules:EngineBridge:CommandReceiver:AppConnector'
           |    +--- Project ':modules:EngineBridge:CommandReceiver:CommandRouter'
-          |    +--- Project ':modules:EngineBridge:CommandReceiver:Commander'
+          |    +--- Project ':modules:EngineBridge:CommandReceiver:EngineCommander'
           |    \--- Project ':modules:EngineBridge:CommandReceiver:OpenCVConnector'
           \--- Project ':modules:EngineBridge:NotificationChannel'
 </pre>
