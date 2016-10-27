@@ -1,3 +1,11 @@
-Bundle-SymbolicName: commandrouter
-Bundle-Version: 1.0.0
-Export-Package: com.example.api
+Bundle-Name: Command Router
+Bundle-SymbolicName: edu.ufmg.lab3.tetris.enginebridge.commandReceiver.commandrouter; singleton:=true
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+
+Import-Package: *
+
+-dsannotations: *
+-runee: JavaSE-1.8
+-snapshot: ${tstamp}
+-check: all

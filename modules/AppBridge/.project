@@ -13,6 +13,5 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
-		<nature>com.liferay.ide.core.liferayNature</nature>
 	</natures>
 </projectDescription>
