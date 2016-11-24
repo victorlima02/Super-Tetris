@@ -1,0 +1,13 @@
+Bundle-Name: Base Connector
+Bundle-SymbolicName: edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector; singleton:=true
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+
+Import-Package: *
+
+Export-Package: edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector
+
+-dsannotations: *
+-runee: JavaSE-1.8
+-snapshot: ${tstamp}
+-check: all

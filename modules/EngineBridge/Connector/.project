@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>EngineBridge</name>
-	<comment>Project EngineBridge created by Buildship.</comment>
+	<name>Connector</name>
+	<comment>Project Connector created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>

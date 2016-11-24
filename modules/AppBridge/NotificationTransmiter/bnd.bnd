@@ -1,7 +1,0 @@
-Bundle-SymbolicName: notificationtransmiter
-Bundle-Version: 1.1.0.SNAPSHOT
-
--runee: JavaSE-1.8 
--snapshot: ${tstamp}
--dsannotations: *
--check: all
