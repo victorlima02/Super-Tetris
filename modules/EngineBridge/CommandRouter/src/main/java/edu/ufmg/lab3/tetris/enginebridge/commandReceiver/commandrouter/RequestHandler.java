@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import org.osgi.service.component.annotations.Reference;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -16,6 +18,8 @@ public class RequestHandler implements Runnable {
 
 	private static Log log = LogFactoryUtil.getLog(RequestHandler.class);
 	private Socket client;
+	
+	private EngineCommander engineCommander;
 
 	public RequestHandler(Socket client) {
 		this.client = client;
@@ -36,11 +40,17 @@ public class RequestHandler implements Runnable {
 
 				log.info("msg from " + client.getRemoteSocketAddress() + ":" + msg);
 				
+				engineCommander.process(msg);
 			}
 
 		} catch (IOException e) {
 			
 		} 
+	}
+	
+	@Reference(unbind = "-")
+	public void setEngineCommander(EngineCommander engineCommander) {
+		this.engineCommander=engineCommander;
 	}
 
 }

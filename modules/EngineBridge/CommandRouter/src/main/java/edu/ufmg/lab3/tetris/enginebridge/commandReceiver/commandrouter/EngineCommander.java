@@ -1,22 +1,20 @@
-package edu.ufmg.lab3.tetris.enginebridge.commandReceiver.enginecommander;
+package edu.ufmg.lab3.tetris.enginebridge.commandReceiver.commandrouter;
 
-import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector.Connector;
 import edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector.Message;
 
-@Component(immediate = true, service = Object.class)
+@Component(immediate = true, service = EngineCommander.class)
 public class EngineCommander extends Thread implements Connector {
 
 	private static Log log = LogFactoryUtil.getLog(EngineCommander.class);
@@ -24,7 +22,7 @@ public class EngineCommander extends Thread implements Connector {
 
 	private volatile ServerSocket serverSocket;
 	private Socket client;
-	BufferedWriter clientWriter;
+	DataOutputStream clientWriter;
 
 	@Override
 	public void process(Message msg) {
@@ -34,6 +32,7 @@ public class EngineCommander extends Thread implements Connector {
 			clientWriter.write(msg.getPlayer());
 			clientWriter.write(msg.getMove());
 			clientWriter.write(msg.getUnits());
+			clientWriter.flush(); 
 
 			log.info("-> msg for " + client.getRemoteSocketAddress() + ":" + msg);
 
@@ -45,8 +44,8 @@ public class EngineCommander extends Thread implements Connector {
 	@Activate
 	public void activate() {
 		setDaemon(true);
-		run();
-		log.info("CommandRouter loaded");
+		start();
+		log.info("EngineCommander loaded");
 	}
 
 	@Deactivate
@@ -55,15 +54,17 @@ public class EngineCommander extends Thread implements Connector {
 		try {
 
 			serverSocket.close();
+			clientWriter.close();
 			client.close();
 
 		} catch (Exception e) {
 			log.error(e);
 		}
 		join(5000);
-		log.info("CommandRouter stopped");
+		log.info("EngineCommander stopped");
 	}
 
+	@Override
 	public void run() {
 		while (!isInterrupted())
 			try {
@@ -93,12 +94,16 @@ public class EngineCommander extends Thread implements Connector {
 	private void doConnection(ServerSocket server) {
 		try {
 			client = serverSocket.accept();
-			clientWriter = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-			log.info("Tetris engine connected: " + client.getRemoteSocketAddress());
-
+			try (DataOutputStream writer = new DataOutputStream(client.getOutputStream())) {
+				writer.write(new byte[] { 1, 1, 1 }); writer.flush(); 
+				writer.write(new byte[] { 1, 2, 2 }); writer.flush(); 
+				
+				writer.write(new byte[] { 1, 3, 1 }); writer.flush();
+				writer.write(new byte[] { 1, 4, 1 }); writer.flush();
+			}
 		} catch (Exception e) {
-			log.info("client disconnected: " + client.getRemoteSocketAddress());
 		}
 	}
+	
 
 }

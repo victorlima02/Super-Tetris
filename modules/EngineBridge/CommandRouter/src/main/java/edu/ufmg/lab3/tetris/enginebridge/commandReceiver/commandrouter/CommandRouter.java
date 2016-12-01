@@ -28,7 +28,7 @@ public class CommandRouter extends Thread {
 	@Activate
 	public void activate() {
 		setDaemon(true);
-		run();
+		start();
 		log.info("CommandRouter loaded");
 	}
 
@@ -45,6 +45,7 @@ public class CommandRouter extends Thread {
 		log.info("CommandRouter stopped");
 	}
 
+	@Override
 	public void run() {
 		while (!isInterrupted())
 			try {

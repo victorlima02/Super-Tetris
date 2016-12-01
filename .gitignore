@@ -22,7 +22,10 @@ liferay-theme.json
 #LR modules
 .gradle/
 
-#servers
+#LR config
+database.properties
+
+#LR Servers
 bundles/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
@@ -36,8 +39,12 @@ tmp/
 *.swp
 *~.nib
 local.properties
+.settings/
 .loadpath
 .recommenders
+
+# Eclipse Core
+.project
 
 # External tool builders
 .externalToolBuilders/

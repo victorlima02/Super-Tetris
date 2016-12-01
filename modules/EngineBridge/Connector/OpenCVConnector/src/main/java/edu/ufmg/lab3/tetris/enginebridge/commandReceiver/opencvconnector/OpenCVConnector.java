@@ -5,13 +5,12 @@ import edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector.Message;
 
 import org.osgi.service.component.annotations.Component;
 
-@Component
+@Component(immediate = true, service = Connector.class)
 public class OpenCVConnector implements Connector{
 
 	@Override
 	public void process(Message msg) {
-		// TODO Auto-generated method stub
-		
+			
 	}
 
 }
