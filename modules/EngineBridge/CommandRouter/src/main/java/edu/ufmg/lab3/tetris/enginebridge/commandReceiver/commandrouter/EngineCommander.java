@@ -95,11 +95,11 @@ public class EngineCommander extends Thread implements Connector {
 		try {
 			client = serverSocket.accept();
 			try (DataOutputStream writer = new DataOutputStream(client.getOutputStream())) {
-				writer.write(new byte[] { 1, 1, 1 }); writer.flush(); 
-				writer.write(new byte[] { 1, 2, 2 }); writer.flush(); 
+				writer.write(new byte[] { 1, 1, 1 }); writer.flush();
+				writer.write(new byte[] { 1, 2, 2 }); writer.flush();
 				
-				writer.write(new byte[] { 1, 3, 1 }); writer.flush();
-				writer.write(new byte[] { 1, 4, 1 }); writer.flush();
+				writer.write(new byte[] { 1, 3, 1 }); writer.flush(); 
+				writer.write(new byte[] { 1, 4, 1 }); writer.flush(); 
 			}
 		} catch (Exception e) {
 		}

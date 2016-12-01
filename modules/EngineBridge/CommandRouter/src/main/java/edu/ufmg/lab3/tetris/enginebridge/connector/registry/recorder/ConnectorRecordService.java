@@ -1,7 +1,5 @@
 package edu.ufmg.lab3.tetris.enginebridge.connector.registry.recorder;
 
-import java.util.Set;
-
 import org.osgi.annotation.versioning.ProviderType;
 
 import edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector.Connector;
@@ -9,11 +7,13 @@ import edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector.Connector;
 @ProviderType
 public interface ConnectorRecordService {
 
-	public void register(final Connector origins);
+	public void register(String id, final Connector origins);
+	
+	public void replace(String id, final Connector origins);
 
-	public void unRegister(final Connector origins);
+	public void unRegister(String id);
 
-	public boolean isRegistered(final Connector origin);
+	public boolean isRegistered(String id);
 
-	public Set<Connector> getConnectors();
+	public Connector getConnector(String id);
 }

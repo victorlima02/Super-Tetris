@@ -1,42 +1,45 @@
 package edu.ufmg.lab3.tetris.enginebridge.connector.registry.recorder;
 
-import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-
-import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 
 import edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector.Connector;
 
 @Component(immediate = true, service = ConnectorRecordService.class)
 public class ConnectorRecordServiceImpl implements ConnectorRecordService {
 
-	private Set<Connector> connectors;
+	private ConcurrentHashMap<String, Connector> connectors;
 
 	@Activate
 	void activate(final BundleContext bundleContext) {
-		connectors = new ConcurrentHashSet<>();
+		connectors = new ConcurrentHashMap<>();
 	}
 
 	@Override
-	public void register(final Connector connector) {
-		connectors.add(connector);
+	public void register(String id, final Connector connector) {
+		connectors.put(id, connector);
 	}
 
 	@Override
-	public void unRegister(final Connector connector) {
-		connectors.remove(connector);
+	public void unRegister(String id) {
+		connectors.remove(id);
 	}
 
 	@Override
-	public boolean isRegistered(final Connector Connector) {
-		return connectors.contains(Connector);
+	public boolean isRegistered(String id) {
+		return connectors.contains(id);
 	}
 
 	@Override
-	public Set<Connector> getConnectors() {
-		return connectors;
+	public Connector getConnector(String id){
+		return connectors.get(id);
+	}
+
+	@Override
+	public void replace(String id, Connector connector) {
+		connectors.replace(id, connector);
 	}
 }
