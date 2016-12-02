@@ -4,6 +4,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -23,6 +29,7 @@ public class EngineCommander extends Thread implements Connector {
 	private volatile ServerSocket serverSocket;
 	private Socket client;
 	DataOutputStream clientWriter;
+	ScheduledExecutorService scheduler;
 
 	@Override
 	public void process(Message msg) {
@@ -94,13 +101,12 @@ public class EngineCommander extends Thread implements Connector {
 	private void doConnection(ServerSocket server) {
 		try {
 			client = serverSocket.accept();
-			try (DataOutputStream writer = new DataOutputStream(client.getOutputStream())) {
-				writer.write(new byte[] { 1, 1, 1 }); writer.flush();
-				writer.write(new byte[] { 1, 2, 2 }); writer.flush();
-				
-				writer.write(new byte[] { 1, 3, 1 }); writer.flush(); 
-				writer.write(new byte[] { 1, 4, 1 }); writer.flush(); 
-			}
+			
+			clientWriter = new DataOutputStream(client.getOutputStream());
+			
+			scheduler = Executors.newScheduledThreadPool(1);    
+			scheduler.scheduleAtFixedRate(()->{process(Message.NULL_MESSAGE);} ,0, 300, TimeUnit.MILLISECONDS);
+			
 		} catch (Exception e) {
 		}
 	}

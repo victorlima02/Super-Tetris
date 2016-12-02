@@ -1,4 +1,3 @@
 dependencies {
-	compile "com.liferay:com.liferay.registry.api"
-	compile "com.liferay:com.liferay.registry.impl"
+
 }

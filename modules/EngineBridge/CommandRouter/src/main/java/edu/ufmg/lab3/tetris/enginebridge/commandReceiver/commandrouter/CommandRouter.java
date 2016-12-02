@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -20,6 +21,7 @@ public class CommandRouter extends Thread {
 	private int PORT_NUMBER = 8070;
 	private volatile ServerSocket serverSocket;
 	private Socket client;
+	private EngineCommander engineCommander;
 
 	public CommandRouter() {
 		pool = Executors.newFixedThreadPool(5);
@@ -77,7 +79,7 @@ public class CommandRouter extends Thread {
 		try {
 			client = serverSocket.accept();
 			log.info("client connected: " + client.getRemoteSocketAddress());
-			RequestHandler worker = new RequestHandler(client);
+			RequestHandler worker = new RequestHandler(client,engineCommander);
 			pool.execute(worker);
 
 		} catch (Exception e) {
@@ -86,6 +88,11 @@ public class CommandRouter extends Thread {
 			client = null;
 		}
 
+	}
+	
+	@Reference(unbind = "-")
+	public void setEngineCommander(EngineCommander engineCommander) {
+		this.engineCommander=engineCommander;
 	}
 
 }

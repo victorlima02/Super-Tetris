@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.workspace", version: "1.0.37"
+		classpath "com.liferay:com.liferay.gradle.plugins.workspace:latest.release"
 	}
 
 	repositories {
@@ -11,3 +11,5 @@ buildscript {
 }
 
 apply plugin: "com.liferay.workspace"
+
+include 'modules:EngineBridge:CommandRouter'

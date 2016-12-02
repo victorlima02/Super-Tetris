@@ -1,10 +1,11 @@
 package edu.ufmg.lab3.tetris.enginebridge.connector.baseConnector;
 
 public class Message {
-	private byte app;
-	private byte player;
-	private byte move;
-	private byte units;
+	private byte app = 0;
+	private byte player = 0;
+	private byte move = 0;
+	private byte units = 0;
+	public static final Message NULL_MESSAGE = new Message();
 
 	public byte getApp() {
 		return app;
